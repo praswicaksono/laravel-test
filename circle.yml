@@ -13,11 +13,12 @@ dependencies:
 
 test:
     override:
+    - cp .env.example .env
     - php artisan key:generate
     - vendor/bin/phpunit
 
 deployment:
-    docker-build:
+    docker:
         branch: master
         commands:
             - docker info
