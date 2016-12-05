@@ -1,0 +1,24 @@
+machine:
+    php:
+        version: 7.0.7
+    python:
+        version: 2.7.3
+    services:
+        - docker
+
+dependencies:
+    override:
+    - composer install
+    - pip install awsebcli
+
+test:
+    override:
+    - vendor/bin/phpunit
+
+deployment:
+    docker-build:
+        branch: master
+        commands:
+            - docker info
+            - docker build -t pras/laravel .
+            - docker tag pras/laravel:latest
